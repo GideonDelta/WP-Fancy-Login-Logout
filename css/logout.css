@@ -15,6 +15,10 @@
     text-align: center;
 }
 
+.wpfll-logout-link {
+    cursor: pointer;
+}
+
 .wpfll-confirm-logout-button {
     background-color: #f44336;
     color: #fff;

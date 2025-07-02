@@ -26,7 +26,7 @@ class WPFancyLoginLogout {
      */
     public function replace_logout_link( $items, $args ) {
         if ( ! is_admin() && isset( $args->theme_location ) && in_array( $args->theme_location, array( 'primary', 'secondary' ), true ) ) {
-            $items = str_replace( 'href="#logout"', 'href="#" id="wpfll-logout-link"', $items );
+            $items = str_replace( 'href="#logout"', 'href="#" class="wpfll-logout-link"', $items );
         }
         return $items;
     }

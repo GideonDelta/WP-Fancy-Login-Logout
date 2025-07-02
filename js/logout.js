@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var logoutLink = document.getElementById('wpfll-logout-link');
-    if (!logoutLink) {
+    var logoutLinks = document.querySelectorAll('.wpfll-logout-link');
+    if (!logoutLinks.length) {
         return;
     }
 
-    logoutLink.addEventListener('click', function(e) {
+    logoutLinks.forEach(function(logoutLink) {
+        logoutLink.addEventListener('click', function(e) {
         e.preventDefault();
 
         var offScreenMenu = document.querySelector('.off-screen-menu');
@@ -93,5 +94,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, 500);
+    });
     });
 });
