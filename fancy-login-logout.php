@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
+define( 'WPFLL_VERSION', '1.0.0' );
+
 class WPFancyLoginLogout {
 
     public function __construct() {
@@ -36,6 +38,10 @@ class WPFancyLoginLogout {
      */
     public function ajax_logout() {
         check_ajax_referer( 'wpfll_logout_nonce', 'security' );
+        if ( ! is_user_logged_in() ) {
+            wp_send_json_error();
+        }
+
         wp_logout();
         wp_send_json_success();
     }
@@ -48,11 +54,10 @@ class WPFancyLoginLogout {
             return;
         }
 
-        $version    = '1.0.0';
         $plugin_url = plugin_dir_url( __FILE__ );
 
-        wp_enqueue_style( 'wpfll-styles', $plugin_url . 'css/logout.css', array(), $version );
-        wp_enqueue_script( 'wpfll-script', $plugin_url . 'js/logout.js', array( 'jquery' ), $version, true );
+        wp_enqueue_style( 'wpfll-styles', $plugin_url . 'css/logout.css', array(), WPFLL_VERSION );
+        wp_enqueue_script( 'wpfll-script', $plugin_url . 'js/logout.js', array( 'jquery' ), WPFLL_VERSION, true );
 
         wp_localize_script(
             'wpfll-script',
