@@ -1,0 +1,46 @@
+.wpfll-confirm-logout-box,
+.wpfll-logout-popup {
+    position: fixed;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    max-width: 300px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.wpfll-confirm-logout-button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.wpfll-confirm-logout-button:hover {
+    background-color: #d32f2f;
+}
+
+.wpfll-cancel-logout-button {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.wpfll-cancel-logout-button:hover {
+    background-color: #f0f0f0;
+}
