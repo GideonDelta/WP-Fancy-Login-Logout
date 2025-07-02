@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
+    const { __ } = wp.i18n || { __: ( s ) => s };
     const logoutLink = document.getElementById('wpfll-logout-link');
     if (!logoutLink) {
         return;
@@ -28,11 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const confirmButton = document.createElement('button');
         confirmButton.className = 'wpfll-confirm-logout-button';
-        confirmButton.textContent = 'Confirm Logout';
+        confirmButton.textContent = __( 'Confirm Logout', 'wp-fancy-login-logout' );
 
         const cancelButton = document.createElement('button');
         cancelButton.className = 'wpfll-cancel-logout-button';
-        cancelButton.textContent = 'Nevermind';
+        cancelButton.textContent = __( 'Nevermind', 'wp-fancy-login-logout' );
 
         confirmBox.appendChild(confirmButton);
         confirmBox.appendChild(cancelButton);
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const logoutPopup = document.createElement('div');
             logoutPopup.className = 'wpfll-logout-popup';
-            logoutPopup.textContent = 'Logging you out, please wait...';
+            logoutPopup.textContent = __( 'Logging you out, please wait...', 'wp-fancy-login-logout' );
             document.body.appendChild(logoutPopup);
             document.body.style.opacity = '0.5';
 
@@ -68,16 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 success: (response) => {
                     if (response.success) {
-                        logoutPopup.textContent = 'You have been successfully logged out.';
+                        logoutPopup.textContent = __( 'You have been successfully logged out.', 'wp-fancy-login-logout' );
                         setTimeout(() => {
                             window.location.href = wpfllData.home_url;
                         }, 2000);
                     } else {
-                        console.error('Logout failed.');
+                        console.error( __( 'Logout failed.', 'wp-fancy-login-logout' ) );
                     }
                 },
                 error: (xhr, status, error) => {
-                    console.error('AJAX request failed:', status, error);
+                    console.error( __( 'AJAX request failed:', 'wp-fancy-login-logout' ), status, error );
                 }
             });
         });
