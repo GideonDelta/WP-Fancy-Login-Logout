@@ -77,7 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 },
                 error: (xhr, status, error) => {
-                    console.error('AJAX request failed:', status, error);
+                    console.error(wpfllData.i18n.ajaxError, status, error);
+                    const errorDiv = document.createElement('div');
+                    errorDiv.className = 'wpfll-error-message';
+                    errorDiv.textContent = wpfllData.i18n.ajaxError;
+                    document.body.appendChild(errorDiv);
+                    setTimeout(() => {
+                        errorDiv.remove();
+                    }, 3000);
                 }
             });
         });
