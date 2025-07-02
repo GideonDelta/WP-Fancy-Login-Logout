@@ -6,6 +6,7 @@
  * Author: WP Fancy Plugin Contributors
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+ * Text Domain: wp-fancy-login-logout
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,6 +20,14 @@ class WPFancyLoginLogout {
         add_action( 'wp_ajax_nopriv_wpfll_ajax_logout', array( $this, 'ajax_logout' ) );
         add_action( 'wp_ajax_wpfll_ajax_logout', array( $this, 'ajax_logout' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        add_action( 'init', array( $this, 'load_textdomain' ) );
+    }
+
+    /**
+     * Load plugin textdomain for translations.
+     */
+    public function load_textdomain() {
+        load_plugin_textdomain( 'wp-fancy-login-logout', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
     /**
@@ -61,6 +70,13 @@ class WPFancyLoginLogout {
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
                 'nonce'    => wp_create_nonce( 'wpfll_logout_nonce' ),
                 'home_url' => home_url(),
+                'i18n'     => array(
+                    'confirmLogout' => esc_html__( 'Confirm Logout', 'wp-fancy-login-logout' ),
+                    'nevermind'     => esc_html__( 'Nevermind', 'wp-fancy-login-logout' ),
+                    'loggingOut'    => esc_html__( 'Logging you out, please wait...', 'wp-fancy-login-logout' ),
+                    'logoutSuccess' => esc_html__( 'You have been successfully logged out.', 'wp-fancy-login-logout' ),
+                    'logoutFailed'  => esc_html__( 'Logout failed.', 'wp-fancy-login-logout' ),
+                ),
             )
         );
     }
