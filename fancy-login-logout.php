@@ -17,20 +17,37 @@ define( 'WPFLL_VERSION', '1.0.0' );
 class WPFancyLoginLogout {
 
     public function __construct() {
-        add_filter( 'wp_nav_menu_items', array( $this, 'replace_logout_link' ), 10, 2 );
+        add_filter( 'nav_menu_link_attributes', array( $this, 'mark_logout_link' ), 10, 3 );
         add_action( 'wp_ajax_nopriv_wpfll_ajax_logout', array( $this, 'ajax_logout' ) );
         add_action( 'wp_ajax_wpfll_ajax_logout', array( $this, 'ajax_logout' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
     }
 
     /**
-     * Replace #logout placeholder links in menus with a clickable link.
+     * Add a class to any #logout menu links for JavaScript handling.
+     *
+     * @param array    $atts Anchor tag attributes.
+     * @param WP_Post  $item Menu item object.
+     * @param stdClass $args Menu arguments.
+     * @return array Modified attributes.
      */
-    public function replace_logout_link( $items, $args ) {
-        if ( ! is_admin() && isset( $args->theme_location ) && in_array( $args->theme_location, array( 'primary', 'secondary' ), true ) ) {
-            $items = str_replace( 'href="#logout"', 'href="#" id="wpfll-logout-link"', $items );
+    public function mark_logout_link( $atts, $item, $args ) {
+        if ( is_admin() ) {
+            return $atts;
         }
-        return $items;
+
+        if ( isset( $args->theme_location ) && in_array( $args->theme_location, array( 'primary', 'secondary' ), true ) && '#logout' === $item->url ) {
+            $atts['href'] = '#';
+
+            $classes   = array();
+            if ( isset( $atts['class'] ) ) {
+                $classes = array_filter( explode( ' ', $atts['class'] ) );
+            }
+            $classes[] = 'wpfll-logout-link';
+            $atts['class'] = implode( ' ', array_unique( $classes ) );
+        }
+
+        return $atts;
     }
 
     /**
