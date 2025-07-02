@@ -1,15 +1,16 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var logoutLink = document.getElementById('wpfll-logout-link');
+document.addEventListener('DOMContentLoaded', () => {
+    'use strict';
+    const logoutLink = document.getElementById('wpfll-logout-link');
     if (!logoutLink) {
         return;
     }
 
-    logoutLink.addEventListener('click', function(e) {
+    logoutLink.addEventListener('click', (e) => {
         e.preventDefault();
 
-        var offScreenMenu = document.querySelector('.off-screen-menu');
-        var menuToggle = document.querySelector('.menu-toggle');
-        var mobileMenu = document.querySelector('.nav-primary');
+        const offScreenMenu = document.querySelector('.off-screen-menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.querySelector('.nav-primary');
         if (offScreenMenu && offScreenMenu.classList.contains('activated')) {
             offScreenMenu.classList.remove('activated');
             offScreenMenu.style.display = 'none';
@@ -22,14 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        var confirmBox = document.createElement('div');
+        const confirmBox = document.createElement('div');
         confirmBox.className = 'wpfll-confirm-logout-box';
 
-        var confirmButton = document.createElement('button');
+        const confirmButton = document.createElement('button');
         confirmButton.className = 'wpfll-confirm-logout-button';
         confirmButton.textContent = 'Confirm Logout';
 
-        var cancelButton = document.createElement('button');
+        const cancelButton = document.createElement('button');
         cancelButton.className = 'wpfll-cancel-logout-button';
         cancelButton.textContent = 'Nevermind';
 
@@ -42,10 +43,10 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmBox.style.transform = 'translate(-50%, -50%)';
         confirmBox.style.zIndex = '99999';
 
-        confirmButton.addEventListener('click', function() {
+        confirmButton.addEventListener('click', () => {
             confirmBox.remove();
 
-            var logoutPopup = document.createElement('div');
+            const logoutPopup = document.createElement('div');
             logoutPopup.className = 'wpfll-logout-popup';
             logoutPopup.textContent = 'Logging you out, please wait...';
             document.body.appendChild(logoutPopup);
@@ -65,33 +66,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     action: 'wpfll_ajax_logout',
                     security: wpfllData.nonce
                 },
-                success: function(response) {
+                success: (response) => {
                     if (response.success) {
                         logoutPopup.textContent = 'You have been successfully logged out.';
-                        setTimeout(function() {
+                        setTimeout(() => {
                             window.location.href = wpfllData.home_url;
                         }, 2000);
                     } else {
                         console.error('Logout failed.');
                     }
                 },
-                error: function(xhr, status, error) {
+                error: (xhr, status, error) => {
                     console.error('AJAX request failed:', status, error);
                 }
             });
         });
 
-        cancelButton.addEventListener('click', function() {
+        cancelButton.addEventListener('click', () => {
             confirmBox.remove();
         });
 
-        setTimeout(function() {
-            document.addEventListener('click', function dismissConfirmBox(e) {
+        setTimeout(() => {
+            const dismissConfirmBox = (e) => {
                 if (!confirmBox.contains(e.target)) {
                     confirmBox.remove();
                     document.removeEventListener('click', dismissConfirmBox);
                 }
-            });
+            };
+            document.addEventListener('click', dismissConfirmBox);
         }, 500);
     });
 });
