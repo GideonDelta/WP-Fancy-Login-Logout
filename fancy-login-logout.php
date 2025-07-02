@@ -6,11 +6,13 @@
  * Author: WP Fancy Plugin Contributors
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
- */
+*/
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+
+define( 'WPFLL_VERSION', '1.0.0' );
 
 class WPFancyLoginLogout {
 
@@ -52,11 +54,10 @@ class WPFancyLoginLogout {
             return;
         }
 
-        $version    = '1.0.0';
         $plugin_url = plugin_dir_url( __FILE__ );
 
-        wp_enqueue_style( 'wpfll-styles', $plugin_url . 'css/logout.css', array(), $version );
-        wp_enqueue_script( 'wpfll-script', $plugin_url . 'js/logout.js', array( 'jquery' ), $version, true );
+        wp_enqueue_style( 'wpfll-styles', $plugin_url . 'css/logout.css', array(), WPFLL_VERSION );
+        wp_enqueue_script( 'wpfll-script', $plugin_url . 'js/logout.js', array( 'jquery' ), WPFLL_VERSION, true );
 
         wp_localize_script(
             'wpfll-script',
