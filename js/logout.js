@@ -1,12 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     'use strict';
     const { __ } = wp.i18n || { __: ( s ) => s };
-    const logoutLink = document.getElementById('wpfll-logout-link');
-    if (!logoutLink) {
+    const logoutLinks = document.querySelectorAll('.wpfll-logout-link');
+    if (!logoutLinks.length) {
         return;
     }
 
-    logoutLink.addEventListener('click', (e) => {
+    logoutLinks.forEach((logoutLink) => {
+        logoutLink.addEventListener('click', (e) => {
         e.preventDefault();
 
         const offScreenMenu = document.querySelector('.off-screen-menu');
@@ -103,5 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             document.addEventListener('click', dismissConfirmBox);
         }, 500);
+    });
     });
 });
