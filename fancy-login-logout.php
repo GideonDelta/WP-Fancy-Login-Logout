@@ -70,6 +70,9 @@ class WPFancyLoginLogout {
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
                 'nonce'    => wp_create_nonce( 'wpfll_logout_nonce' ),
                 'home_url' => home_url(),
+                'i18n'     => array(
+                    'ajaxError' => esc_html__( 'AJAX request failed.', 'wp-fancy-login-logout' ),
+                ),
             )
         );
     }
