@@ -15,3 +15,11 @@ This plugin provides a simple JavaScript powered logout confirmation popup. The 
 - Popup message while the logout request is processed.
 
 This plugin is released under the GPLv3 license.
+
+## Localization
+
+Generate a translation template using `wp-cli i18n make-pot`. This will create
+`languages/wp-fancy-login-logout.pot` which translators can use to start new
+translations. Example translation files are `wp-fancy-login-logout-fr_FR.po` and
+`wp-fancy-login-logout-fr_FR.mo`. Place your `.po` and `.mo` files in the
+`languages` directory so WordPress can load them automatically.
