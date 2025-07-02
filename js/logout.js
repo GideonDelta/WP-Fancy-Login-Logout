@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         var confirmButton = document.createElement('button');
         confirmButton.className = 'wpfll-confirm-logout-button';
-        confirmButton.textContent = 'Confirm Logout';
+        confirmButton.textContent = wpfllData.i18n.confirmLogout;
 
         var cancelButton = document.createElement('button');
         cancelButton.className = 'wpfll-cancel-logout-button';
-        cancelButton.textContent = 'Nevermind';
+        cancelButton.textContent = wpfllData.i18n.nevermind;
 
         confirmBox.appendChild(confirmButton);
         confirmBox.appendChild(cancelButton);
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             var logoutPopup = document.createElement('div');
             logoutPopup.className = 'wpfll-logout-popup';
-            logoutPopup.textContent = 'Logging you out, please wait...';
+            logoutPopup.textContent = wpfllData.i18n.loggingOut;
             document.body.appendChild(logoutPopup);
             document.body.style.opacity = '0.5';
 
@@ -67,12 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 success: function(response) {
                     if (response.success) {
-                        logoutPopup.textContent = 'You have been successfully logged out.';
+                        logoutPopup.textContent = wpfllData.i18n.logoutSuccess;
                         setTimeout(function() {
                             window.location.href = wpfllData.home_url;
                         }, 2000);
                     } else {
-                        console.error('Logout failed.');
+                        console.error(wpfllData.i18n.logoutFailed);
                     }
                 },
                 error: function(xhr, status, error) {

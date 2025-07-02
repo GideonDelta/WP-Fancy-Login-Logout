@@ -14,4 +14,8 @@ This plugin provides a simple JavaScript powered logout confirmation popup. The 
 - Confirmation dialog before logging out.
 - Popup message while the logout request is processed.
 
+## Translating
+
+The plugin text domain is `wp-fancy-login-logout`. Translation files can be placed in a `languages` folder inside the plugin directory. Use standard WordPress tools such as [Poedit](https://poedit.net/) or WP-CLI to generate translation files.
+
 This plugin is released under the GPLv3 license.
