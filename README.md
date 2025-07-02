@@ -15,3 +15,8 @@ This plugin provides a simple JavaScript powered logout confirmation popup. The 
 - Popup message while the logout request is processed.
 
 This plugin is released under the GPLv3 license.
+
+## Translating
+
+The plugin no longer ships translatable JavaScript strings, so no extra
+localization files are required.
