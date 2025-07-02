@@ -17,10 +17,18 @@ define( 'WPFLL_VERSION', '1.0.0' );
 class WPFancyLoginLogout {
 
     public function __construct() {
+        add_action( 'init', array( $this, 'load_textdomain' ), 0 );
         add_filter( 'nav_menu_link_attributes', array( $this, 'mark_logout_link' ), 10, 3 );
         add_action( 'wp_ajax_nopriv_wpfll_ajax_logout', array( $this, 'ajax_logout' ) );
         add_action( 'wp_ajax_wpfll_ajax_logout', array( $this, 'ajax_logout' ) );
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+    }
+
+    /**
+     * Load plugin text domain for translations.
+     */
+    public function load_textdomain() {
+        load_plugin_textdomain( 'wp-fancy-login-logout', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
     }
 
     /**
