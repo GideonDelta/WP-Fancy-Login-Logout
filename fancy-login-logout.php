@@ -36,6 +36,10 @@ class WPFancyLoginLogout {
      */
     public function ajax_logout() {
         check_ajax_referer( 'wpfll_logout_nonce', 'security' );
+        if ( ! is_user_logged_in() ) {
+            wp_send_json_error();
+        }
+
         wp_logout();
         wp_send_json_success();
     }
