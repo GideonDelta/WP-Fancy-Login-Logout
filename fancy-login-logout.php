@@ -57,7 +57,11 @@ class WPFancyLoginLogout {
         $plugin_url = plugin_dir_url( __FILE__ );
 
         wp_enqueue_style( 'wpfll-styles', $plugin_url . 'css/logout.css', array(), WPFLL_VERSION );
-        wp_enqueue_script( 'wpfll-script', $plugin_url . 'js/logout.js', array( 'jquery' ), WPFLL_VERSION, true );
+        wp_enqueue_script( 'wpfll-script', $plugin_url . 'js/logout.js', array( 'jquery', 'wp-i18n' ), WPFLL_VERSION, true );
+
+        if ( function_exists( 'wp_set_script_translations' ) ) {
+            wp_set_script_translations( 'wpfll-script', 'wp-fancy-login-logout', plugin_dir_path( __FILE__ ) . 'languages' );
+        }
 
         wp_localize_script(
             'wpfll-script',
@@ -66,6 +70,9 @@ class WPFancyLoginLogout {
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
                 'nonce'    => wp_create_nonce( 'wpfll_logout_nonce' ),
                 'home_url' => home_url(),
+                'i18n'     => array(
+                    'ajaxError' => esc_html__( 'AJAX request failed.', 'wp-fancy-login-logout' ),
+                ),
             )
         );
     }
