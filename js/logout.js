@@ -72,13 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (response.success) {
                         logoutPopup.textContent = __( 'You have been successfully logged out.', 'wp-fancy-login-logout' );
                         setTimeout(() => {
+                            logoutPopup.remove();
+                            document.body.style.opacity = '1';
                             window.location.href = wpfllData.home_url;
                         }, 2000);
                     } else {
+                        logoutPopup.remove();
+                        document.body.style.opacity = '1';
                         console.error( __( 'Logout failed.', 'wp-fancy-login-logout' ) );
                     }
                 },
                 error: (xhr, status, error) => {
+                    logoutPopup.remove();
+                    document.body.style.opacity = '1';
                     console.error(wpfllData.i18n.ajaxError, status, error);
                     const errorDiv = document.createElement('div');
                     errorDiv.className = 'wpfll-error-message';
